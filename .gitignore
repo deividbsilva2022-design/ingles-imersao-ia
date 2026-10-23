@@ -1,0 +1,25 @@
+# Sistema Operacional e Sincronização em Nuvem
+desktop.ini
+Thumbs.db
+.DS_Store
+*.tmp
+*.temp
+
+# Arquivos de IDE e Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ambientes virtuais e logs
+*.log
+__pycache__/
+.venv/
+env/
+
+# Credenciais e Variáveis de Ambiente locais (caso usadas)
+.env
+.env.local
+.env.*.local
+*.pem
+*.key

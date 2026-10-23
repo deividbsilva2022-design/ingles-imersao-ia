@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard de Evolução em Inglês • Rafael</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-card: #151d30;
+      --surface-hover: #1e293b;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(14, 165, 233, 0.4);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --accent: #0ea5e9;
+      --accent-glow: rgba(14, 165, 233, 0.25);
+      --emerald: #10b981;
+      --teal: #06b6d4;
+      --indigo: #6366f1;
+      --purple: #8b5cf6;
+      --amber: #f59e0b;
+      --amber-bg: rgba(245, 158, 11, 0.12);
+      --rose: #f43f5e;
+      --rose-bg: rgba(244, 63, 94, 0.12);
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at 15% 15%, #0c1e38 0%, #090d16 60%, #05080e 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* Top Bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .brand-info h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge-med {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(14, 165, 233, 0.15);
+      color: #38bdf8;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(14, 165, 233, 0.3);
+    }
+
+    .brand-info p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .streak-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .streak-sparkle {
+      color: #38bdf8;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    /* Metric Cards Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .metric-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .metric-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--metric-color, var(--accent));
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .metric-value {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .metric-sub {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    /* Alert Banner */
+    .alert-banner {
+      background: linear-gradient(90deg, rgba(14, 165, 233, 0.12) 0%, rgba(6, 182, 212, 0.06) 100%);
+      border: 1px solid rgba(14, 165, 233, 0.25);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .alert-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .alert-banner-icon {
+      font-size: 24px;
+    }
+
+    .alert-banner-text h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 2px;
+    }
+
+    .alert-banner-text p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .btn-action {
+      background: var(--accent);
+      color: #090d16;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-action:hover {
+      background: #38bdf8;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Section Card */
+    .section-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* 4 Phases Track */
+    .phases-track {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .phase-card {
+      background: rgba(17, 24, 39, 0.7);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .phase-card.active {
+      border-color: rgba(14, 165, 233, 0.5);
+      background: linear-gradient(180deg, rgba(14, 165, 233, 0.08) 0%, rgba(17, 24, 39, 0.8) 100%);
+      box-shadow: 0 0 25px rgba(14, 165, 233, 0.1);
+    }
+
+    .phase-card.locked {
+      opacity: 0.65;
+    }
+
+    .phase-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .phase-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    .phase-card.active .phase-tag {
+      background: rgba(14, 165, 233, 0.2);
+      color: #38bdf8;
+    }
+
+    .phase-name {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .phase-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0ea5e9, #06b6d4);
+      border-radius: 6px;
+      transition: width 0.5s ease;
+    }
+
+    /* Week Routine Bar */
+    .week-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 800px) {
+      .week-days {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .day-slot {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 10px;
+      text-align: center;
+      position: relative;
+    }
+
+    .day-slot.next {
+      border-color: #38bdf8;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+      background: rgba(14, 165, 233, 0.08);
+    }
+
+    .day-name {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    .day-topic {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .day-status {
+      font-size: 11px;
+      margin-top: 6px;
+      display: inline-block;
+    }
+
+    /* Navigation Tabs */
+    .tabs-nav {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .tab-btn.active {
+      color: #fff;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Class Cards */
+    .class-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 16px;
+      transition: all 0.2s;
+    }
+
+    .class-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .class-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .class-number {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .class-date {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .class-block {
+      margin-bottom: 14px;
+    }
+
+    .class-block-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+
+    .topic-list {
+      list-style: none;
+    }
+
+    .topic-list li {
+      font-size: 13px;
+      color: #cbd5e1;
+      padding: 4px 0;
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .topic-list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .step-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+
+    .step-box-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 4px;
+    }
+
+    .step-box-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .word-badge {
+      background: rgba(14, 165, 233, 0.12);
+      border: 1px solid rgba(14, 165, 233, 0.3);
+      color: #38bdf8;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .word-badge:hover {
+      background: rgba(14, 165, 233, 0.25);
+    }
+
+    /* Mistake Radar */
+    .mistake-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .mistake-content {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .mistake-wrong {
+      color: #f87171;
+      text-decoration: line-through;
+      font-size: 13px;
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    .mistake-correct {
+      color: #38bdf8;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .mistake-why {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .status-badge.attention {
+      background: var(--amber-bg);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .status-badge.guide {
+      background: rgba(14, 165, 233, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(14, 165, 233, 0.3);
+    }
+
+    /* Vocab Search */
+    .search-box {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box:focus {
+      border-color: var(--accent);
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .vocab-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .vocab-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .vocab-term {
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .vocab-meaning {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .vocab-type {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-dim);
+    }
+
+    .audio-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .audio-btn:hover {
+      background: var(--accent);
+      color: #090d16;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    /* Sync Bar */
+    .sync-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+      transition: border-color 0.2s;
+    }
+    .sync-bar:hover {
+      border-color: rgba(14, 165, 233, 0.3);
+    }
+    .sync-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .sync-dot {
+      font-size: 14px;
+      line-height: 1;
+    }
+    .sync-dot.live {
+      color: #10b981;
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+    }
+    .sync-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-sync {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-sync:hover {
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+    .btn-sync-refresh {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-sync-refresh:hover {
+      color: #fff;
+      border-color: var(--accent);
+      transform: rotate(90deg);
+    }
+    .drop-zone-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(9, 13, 22, 0.92);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border: 3px dashed var(--accent);
+      margin: 16px;
+      border-radius: var(--radius-lg);
+    }
+    .drop-zone-overlay.active {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Overlay para Drag & Drop de arquivo -->
+  <div class="drop-zone-overlay" id="dropOverlay">
+    <div style="font-size: 48px; margin-bottom: 12px;">📥</div>
+    <div style="font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px;">Solte o arquivo registro-aulas.md aqui</div>
+    <div style="font-size: 14px; color: var(--text-muted);">O dashboard atualizará instantaneamente em tempo real!</div>
+  </div>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="avatar-icon">👨‍⚕️</div>
+        <div class="brand-info">
+          <h1>Rafael <span class="badge-med">Medicina • Comunicação Clínica</span></h1>
+          <p>Plano de Fluência Médica & Artigos de Alto Impacto • 24 Semanas</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="streak-pill">
+          <span class="streak-sparkle">✨</span>
+          <span><strong>Pronto para Iniciar</strong> • Aula 1 por Voz</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Barra de Sincronização Automática com registro-aulas.md -->
+    <div class="sync-bar" id="syncBar">
+      <div class="sync-status">
+        <span class="sync-dot live" id="syncDot">●</span>
+        <span id="syncText">Sincronizado com <code>registro-aulas.md</code></span>
+      </div>
+      <div class="sync-actions">
+        <button class="btn-sync" onclick="triggerFileSelect()">📂 Conectar registro-aulas.md</button>
+        <button class="btn-sync-refresh" onclick="reloadRegistration()" title="Recarregar">🔄</button>
+        <input type="file" id="fileInput" accept=".md" style="display: none;" onchange="handleFileSelected(event)">
+      </div>
+    </div>
+
+    <!-- Top Metrics -->
+    <div class="metrics-grid">
+      <div class="metric-card" style="--metric-color: #0ea5e9;">
+        <div class="metric-label">Progresso Geral <span>📊</span></div>
+        <div class="metric-value">Aula 0 <span style="font-size: 16px; font-weight: 500; color: var(--text-muted);">/ 144</span></div>
+        <div class="metric-sub">Semana 1 de 24 (Fase 1: Fundamentos Hospitalares)</div>
+      </div>
+
+      <div class="metric-card" style="--metric-color: #06b6d4;">
+        <div class="metric-label">Nível de Partida <span>🎯</span></div>
+        <div class="metric-value">A2 → B1 <span style="font-size: 14px; font-weight: 500; color: #38bdf8;">(Transição)</span></div>
+        <div class="metric-sub">Básico consolidado para Intermediário Clínico</div>
+      </div>
+
+      <div class="metric-card" style="--metric-color: #10b981;">
+        <div class="metric-label">Vocabulário-Chave Mapeado <span>📚</span></div>
+        <div class="metric-value">28 <span style="font-size: 16px; font-weight: 500; color: var(--text-muted);">termos</span></div>
+        <div class="metric-sub">Sinais vitais, equipamentos, setores & artigos</div>
+      </div>
+
+      <div class="metric-card" style="--metric-color: #8b5cf6;">
+        <div class="metric-label">Próximo Marco <span>🏁</span></div>
+        <div class="metric-value">Semana 6</div>
+        <div class="metric-sub">Checagem de Nível 1 (Rotina Hospitalar & Setores)</div>
+      </div>
+    </div>
+
+    <!-- Alert Banner: Start Status -->
+    <div class="alert-banner">
+      <div class="alert-banner-left">
+        <span class="alert-banner-icon">🎙️</span>
+        <div class="alert-banner-text">
+          <h4>Pronto para a Aula 1: Protocolo de Diagnóstico Inicial (15 min)</h4>
+          <p>O Claude já está instruído em <code>INSTRUCOES-CLAUDE.md</code> para conduzir sua avaliação rápida e amigável por voz.</p>
+        </div>
+      </div>
+      <button class="btn-action" onclick="switchTab('classes')">Ver Roteiro da Aula 1 →</button>
+    </div>
+
+    <!-- 4 Phases Journey -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span>🗺️</span> Trilha de 24 Semanas Médicas (4 Fases de Evolução)
+        </div>
+        <span style="font-size: 13px; color: var(--accent); font-weight: 600;">Fase Atual: Fase 1 (Semanas 1 a 6)</span>
+      </div>
+
+      <div class="phases-track">
+        
+        <!-- Fase 1 -->
+        <div class="phase-card active">
+          <div class="phase-top">
+            <span class="phase-tag">Fase 1 • Semanas 1 a 6</span>
+            <span style="font-size: 12px; color: #38bdf8; font-weight: 700;">INICIANDO</span>
+          </div>
+          <div class="phase-name">Fundamentos Hospitalares</div>
+          <div class="phase-desc">Sinais vitais, setores hospitalares, equipamentos, corpo humano e leitura de abstract médico.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-dim); margin-top: 10px;">
+            <span>Aulas concluídas: 0 / 36</span>
+            <span>0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Fase 2 -->
+        <div class="phase-card locked">
+          <div class="phase-top">
+            <span class="phase-tag">Fase 2 • Semanas 7 a 12</span>
+            <span style="font-size: 12px; color: var(--text-dim);">🔒 Bloqueada</span>
+          </div>
+          <div class="phase-name">Anamnese & Semiologia</div>
+          <div class="phase-desc">Chief complaint & HPI, caracterização completa da dor, sintomas e histórico de medicamentos.</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Fase 3 -->
+        <div class="phase-card locked">
+          <div class="phase-top">
+            <span class="phase-tag">Fase 3 • Semanas 13 a 18</span>
+            <span style="font-size: 12px; color: var(--text-dim);">🔒 Bloqueada</span>
+          </div>
+          <div class="phase-name">Raciocínio Diagnóstico</div>
+          <div class="phase-desc">Differential diagnosis, exames (CBC, TC, USG), más notícias com empatia e posologia.</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Fase 4 -->
+        <div class="phase-card locked">
+          <div class="phase-top">
+            <span class="phase-tag">Fase 4 • Semanas 19 a 24</span>
+            <span style="font-size: 12px; color: var(--text-dim);">🔒 Bloqueada</span>
+          </div>
+          <div class="phase-name">Passagem de Plantão & PBE</div>
+          <div class="phase-desc">Handover (SBAR), emergências (PCR, IAM, sepse) e leitura crítica no Lancet, NEJM e JAMA.</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Weekly Schedule Strip -->
+      <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border);">
+        <div style="font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">
+          Rotina Semanal Fixa (15 Minutos / Dia)
+        </div>
+        <div class="week-days">
+          <div class="day-slot next">
+            <div class="day-name">Segunda</div>
+            <div class="day-topic">Cotidiano Rápido</div>
+            <div class="day-status" style="color: #38bdf8; font-weight: 700;">Situações Reais</div>
+          </div>
+          <div class="day-slot">
+            <div class="day-name">Terça</div>
+            <div class="day-topic">Gramática Comunicativa</div>
+            <div class="day-status" style="color: var(--text-dim);">Perguntas Clínicas</div>
+          </div>
+          <div class="day-slot">
+            <div class="day-name">Quarta</div>
+            <div class="day-topic">Medicina & Hospital</div>
+            <div class="day-status" style="color: var(--text-dim);">Semiologia & Setores</div>
+          </div>
+          <div class="day-slot">
+            <div class="day-name">Quinta</div>
+            <div class="day-topic">Cotidiano & Prática</div>
+            <div class="day-status" style="color: var(--text-dim);">Phrasal Verbs</div>
+          </div>
+          <div class="day-slot">
+            <div class="day-name">Sexta</div>
+            <div class="day-topic">Artigo Médico - Parte 1</div>
+            <div class="day-status" style="color: var(--text-dim);">Abstract & Métodos</div>
+          </div>
+          <div class="day-slot">
+            <div class="day-name">Sábado</div>
+            <div class="day-topic">Artigo Médico - Parte 2</div>
+            <div class="day-status" style="color: var(--text-dim);">Revisão Integrada</div>
+          </div>
+          <div class="day-slot">
+            <div class="day-name">Domingo</div>
+            <div class="day-topic">Folga Total</div>
+            <div class="day-status" style="color: var(--text-dim);">Descanso</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Main Tabs Navigation -->
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab('classes')">📖 Roteiro da Aula 1 & Histórico</button>
+      <button class="tab-btn" onclick="switchTab('radar')">🎯 Radar Médico & Pronúncia (Guia)</button>
+      <button class="tab-btn" onclick="switchTab('vocab')">🔤 Vocabulário Hospitalar & Clínico (28)</button>
+      <button class="tab-btn" onclick="switchTab('articles')">🔬 Artigos Médicos (IMRAD & SBAR)</button>
+    </div>
+
+    <!-- Tab 1: Histórico das Aulas & Aula 1 Protocol -->
+    <div id="tab-classes" class="tab-content active">
+      
+      <!-- Aula 1 Preparada -->
+      <div class="class-card" style="border-color: rgba(14, 165, 233, 0.4); background: linear-gradient(180deg, rgba(14, 165, 233, 0.05) 0%, rgba(21, 29, 48, 0.95) 100%);">
+        <div class="class-head">
+          <div>
+            <div class="class-number">Aula 1 • Protocolo de Avaliação Inicial e Nivelamento (15 min)</div>
+            <div class="class-date">Próxima Aula por Voz • Professor: Claude • Foco: Conversação Diagnóstica</div>
+          </div>
+          <span class="badge-med">Diagnóstico Inicial</span>
+        </div>
+
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Como o seu arquivo <code>registro-aulas.md</code> está limpo para começar, o Claude seguirá um bate-papo leve, amigável e descontraído de 15 minutos para mapear seu vocabulário e ajustar o ritmo das semanas seguintes:
+        </p>
+
+        <div class="step-box">
+          <div class="step-box-header">
+            <span>1. Boas-vindas & Aquecimento (2 min)</span>
+            <span style="color: var(--text-dim);">Português</span>
+          </div>
+          <div class="step-box-desc">
+            Cumprimento inicial, alinhamento dos 15 minutos e explicação de que é apenas uma conversa amigável para calibrar o plano de ensino.
+          </div>
+        </div>
+
+        <div class="step-box">
+          <div class="step-box-header">
+            <span>2. Diagnóstico Geral de Fala e Escuta (6 min)</span>
+            <span style="color: var(--accent);">Inglês Cotidiano</span>
+          </div>
+          <div class="step-box-desc">
+            Perguntas abertas sobre nome, rotina de estudos, hobbies e fim de semana. Teste natural de passado (<em>"What did you do yesterday?"</em>) e futuro simples (<em>"What are your plans?"</em>).
+          </div>
+        </div>
+
+        <div class="step-box">
+          <div class="step-box-header">
+            <span>3. Diagnóstico Médico e Compreensão (4 min)</span>
+            <span style="color: var(--accent);">Inglês Médico</span>
+          </div>
+          <div class="step-box-desc">
+            Conversa sobre por que você escolheu Medicina, especialidade de interesse e compreensão de frases reais sobre o hospital e saúde.
+          </div>
+        </div>
+
+        <div class="step-box" style="margin-bottom: 0;">
+          <div class="step-box-header">
+            <span>4. Feedback e Registro de Nível (3 min)</span>
+            <span style="color: #10b981;">Fechamento</span>
+          </div>
+          <div class="step-box-desc">
+            Feedback caloroso sobre seus pontos fortes e registro automático no <code>registro-aulas.md</code> confirmando o nível inicial (A2 ou B1).
+          </div>
+        </div>
+
+        <div class="class-block" style="margin-top: 18px; margin-bottom: 0;">
+          <div class="class-block-title">Regras Pedagógicas da Sua Sessão com o Claude</div>
+          <ul class="topic-list">
+            <li><strong>Regra 80/20:</strong> Você fala a maior parte do tempo. O professor joga a bola e você rebate com respostas ativas.</li>
+            <li><strong>Português Primeiro, Inglês Depois:</strong> Quando o Claude introduzir qualquer conceito novo, ele explica primeiro em português e aplica em inglês.</li>
+            <li><strong>Espelhamento Completo:</strong> Se errar uma pronúncia ou tempo verbal, o Claude repetirá a frase <em>inteira correta</em> para você repetir e memorizar a estrutura inteira.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Empty State Card for Future Classes -->
+      <div style="background: rgba(255, 255, 255, 0.02); border: 1px dashed var(--border); border-radius: var(--radius-md); padding: 24px; text-align: center;">
+        <span style="font-size: 28px; display: block; margin-bottom: 8px;">📝</span>
+        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 4px;">Histórico Sincronizado</h4>
+        <p style="font-size: 13px; color: var(--text-muted); max-width: 500px; margin: 0 auto;">
+          Assim que você fizer a Aula 1 com o Claude, ele registrará o resumo, palavras novas e pontos observados no seu <code>registro-aulas.md</code>, que alimentará este histórico.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Tab 2: Radar de Erros e Pronúncia -->
+    <div id="tab-radar" class="tab-content">
+      <div style="margin-bottom: 20px;">
+        <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">Monitor de Armadilhas & Falsos Cognatos na Medicina</h3>
+        <p style="font-size: 13px; color: var(--text-muted);">
+          Pontos críticos da comunicação médica identificados no plano para você já ficar atento desde a primeira semana:
+        </p>
+      </div>
+
+      <!-- Item 1 -->
+      <div class="mistake-card">
+        <div class="mistake-content">
+          <div>
+            <span class="mistake-wrong">"I want to subscribe a medication"</span>
+            <span class="mistake-correct">"I want to prescribe a medication"</span>
+          </div>
+          <div class="mistake-why">
+            ⚠️ <strong>Prescribe vs Subscribe:</strong> <em>Prescribe</em> é prescrever/receitar medicamento. <em>Subscribe</em> significa assinar um canal, revista ou serviço.
+          </div>
+        </div>
+        <span class="status-badge guide">💡 Falso Cognato</span>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="mistake-card">
+        <div class="mistake-content">
+          <div>
+            <span class="mistake-wrong">"The patient is constipated" (quando está gripado)</span>
+            <span class="mistake-correct">"The patient has a cold / has the flu"</span>
+          </div>
+          <div class="mistake-why">
+            ⚠️ <strong>Constipated:</strong> Em inglês médico, <em>constipated</em> significa constipado/com prisão de ventre intestinal! Gripe/resfriado é <em>cold</em> ou <em>flu</em>.
+          </div>
+        </div>
+        <span class="status-badge guide">💡 Falso Cognato</span>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="mistake-card">
+        <div class="mistake-content">
+          <div>
+            <span class="mistake-wrong">"The physicist examined the patient"</span>
+            <span class="mistake-correct">"The physician examined the patient"</span>
+          </div>
+          <div class="mistake-why">
+            ⚠️ <strong>Physician vs Physicist:</strong> <em>Physician</em> é médico clínico. <em>Physicist</em> é físico (profissional da física quântica/mecânica).
+          </div>
+        </div>
+        <span class="status-badge guide">💡 Vocabulário</span>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="mistake-card">
+        <div class="mistake-content">
+          <div>
+            <span class="mistake-wrong">"How much time do you feel this pain?"</span>
+            <span class="mistake-correct">"How long have you had this pain?"</span>
+          </div>
+          <div class="mistake-why">
+            ⚠️ <strong>Estrutura de Anamnese:</strong> Para duração de sintomas, médicos nativos utilizam <em>"How long have you had..."</em> com o Present Perfect.
+          </div>
+        </div>
+        <span class="status-badge guide">💡 Gramática Clínica</span>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="mistake-card">
+        <div class="mistake-content">
+          <div>
+            <span class="mistake-wrong">"Stethó-scope" (tônica errada)</span>
+            <span class="mistake-correct">"STETH-uh-skope" (estetoscópio)</span>
+          </div>
+          <div class="mistake-why">
+            ⚠️ <strong>Atenção fonética:</strong> A ênfase é na primeira sílaba. Clique no botão de áudio na aba de vocabulário para ouvir a pronúncia correta!
+          </div>
+        </div>
+        <span class="status-badge guide">💡 Fonética</span>
+      </div>
+
+    </div>
+
+    <!-- Tab 3: Vocabulário Completo -->
+    <div id="tab-vocab" class="tab-content">
+      <input type="text" class="search-box" id="vocabSearch" placeholder="🔍 Buscar termo médico, sintoma ou tradução em português..." onkeyup="filterVocab()">
+
+      <div class="vocab-grid" id="vocabGrid">
+        
+        <!-- Sinais Vitais -->
+        <div class="vocab-card" data-term="blood pressure" data-trans="pressão arterial PA">
+          <div>
+            <div class="vocab-term">blood pressure</div>
+            <div class="vocab-meaning">pressão arterial (PA)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Sinais Vitais</span>
+            <button class="audio-btn" onclick="speak('blood pressure')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="heart rate" data-trans="frequência cardíaca FC batimentos">
+          <div>
+            <div class="vocab-term">heart rate</div>
+            <div class="vocab-meaning">frequência cardíaca (FC)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Sinais Vitais</span>
+            <button class="audio-btn" onclick="speak('heart rate')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="respiratory rate" data-trans="frequência respiratória FR">
+          <div>
+            <div class="vocab-term">respiratory rate</div>
+            <div class="vocab-meaning">frequência respiratória (FR)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Sinais Vitais</span>
+            <button class="audio-btn" onclick="speak('respiratory rate')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="temperature fever" data-trans="temperatura febre">
+          <div>
+            <div class="vocab-term">temperature / fever</div>
+            <div class="vocab-meaning">temperatura / febre</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Sinais Vitais</span>
+            <button class="audio-btn" onclick="speak('temperature and fever')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="oxygen saturation" data-trans="saturação de oxigênio saturação">
+          <div>
+            <div class="vocab-term">oxygen saturation</div>
+            <div class="vocab-meaning">saturação de oxigênio (SpO2)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Sinais Vitais</span>
+            <button class="audio-btn" onclick="speak('oxygen saturation')">🔊</button>
+          </div>
+        </div>
+
+        <!-- Equipamentos Médicos -->
+        <div class="vocab-card" data-term="stethoscope" data-trans="estetoscópio">
+          <div>
+            <div class="vocab-term">stethoscope</div>
+            <div class="vocab-meaning">estetoscópio</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Equipamento</span>
+            <button class="audio-btn" onclick="speak('stethoscope')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="sphygmomanometer" data-trans="esfigmomanômetro aparelho de pressão">
+          <div>
+            <div class="vocab-term">sphygmomanometer</div>
+            <div class="vocab-meaning">esfigmomanômetro</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Equipamento</span>
+            <button class="audio-btn" onclick="speak('sphygmomanometer')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="pulse oximeter" data-trans="oxímetro de pulso">
+          <div>
+            <div class="vocab-term">pulse oximeter</div>
+            <div class="vocab-meaning">oxímetro de pulso</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Equipamento</span>
+            <button class="audio-btn" onclick="speak('pulse oximeter')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="syringe" data-trans="seringa">
+          <div>
+            <div class="vocab-term">syringe</div>
+            <div class="vocab-meaning">seringa</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Equipamento</span>
+            <button class="audio-btn" onclick="speak('syringe')">🔊</button>
+          </div>
+        </div>
+
+        <!-- Setores Hospitalares -->
+        <div class="vocab-card" data-term="emergency room ED ER" data-trans="pronto-socorro emergência ps">
+          <div>
+            <div class="vocab-term">Emergency Room (ER / ED)</div>
+            <div class="vocab-meaning">pronto-socorro / emergência</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Setor</span>
+            <button class="audio-btn" onclick="speak('Emergency Room')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="intensive care unit ICU" data-trans="UTI unidade de terapia intensiva CTI">
+          <div>
+            <div class="vocab-term">Intensive Care Unit (ICU)</div>
+            <div class="vocab-meaning">UTI / CTI</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Setor</span>
+            <button class="audio-btn" onclick="speak('Intensive Care Unit')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="operating room OR" data-trans="centro cirúrgico sala de cirurgia">
+          <div>
+            <div class="vocab-term">Operating Room (OR)</div>
+            <div class="vocab-meaning">centro cirúrgico / sala operatória</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Setor</span>
+            <button class="audio-btn" onclick="speak('Operating Room')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="outpatient clinic" data-trans="ambulatório consultório externo">
+          <div>
+            <div class="vocab-term">Outpatient Clinic</div>
+            <div class="vocab-meaning">ambulatório externo</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Setor</span>
+            <button class="audio-btn" onclick="speak('Outpatient Clinic')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="inpatient ward" data-trans="enfermaria leito internamento">
+          <div>
+            <div class="vocab-term">Inpatient Ward</div>
+            <div class="vocab-meaning">enfermaria / leitos de internação</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Setor</span>
+            <button class="audio-btn" onclick="speak('Inpatient Ward')">🔊</button>
+          </div>
+        </div>
+
+        <!-- Sintomas & Semiologia -->
+        <div class="vocab-card" data-term="chief complaint CC" data-trans="queixa principal QP">
+          <div>
+            <div class="vocab-term">Chief Complaint (CC)</div>
+            <div class="vocab-meaning">queixa principal</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Semiologia</span>
+            <button class="audio-btn" onclick="speak('Chief Complaint')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="shortness of breath dyspnea" data-trans="falta de ar dispneia">
+          <div>
+            <div class="vocab-term">shortness of breath</div>
+            <div class="vocab-meaning">falta de ar (dispneia)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Sintoma</span>
+            <button class="audio-btn" onclick="speak('shortness of breath')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="chest pain" data-trans="dor no peito dor torácica">
+          <div>
+            <div class="vocab-term">chest pain</div>
+            <div class="vocab-meaning">dor no peito / torácica</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Sintoma</span>
+            <button class="audio-btn" onclick="speak('chest pain')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="dizziness" data-trans="tontura vertigem">
+          <div>
+            <div class="vocab-term">dizziness</div>
+            <div class="vocab-meaning">tontura</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Sintoma</span>
+            <button class="audio-btn" onclick="speak('dizziness')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="nausea" data-trans="náusea enjoo">
+          <div>
+            <div class="vocab-term">nausea</div>
+            <div class="vocab-meaning">náusea / enjoo</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Sintoma</span>
+            <button class="audio-btn" onclick="speak('nausea')">🔊</button>
+          </div>
+        </div>
+
+        <!-- Termos de Artigos Científicos -->
+        <div class="vocab-card" data-term="efficacy" data-trans="eficácia">
+          <div>
+            <div class="vocab-term">efficacy</div>
+            <div class="vocab-meaning">eficácia</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Artigo Científico</span>
+            <button class="audio-btn" onclick="speak('efficacy')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="baseline characteristics" data-trans="características basais perfil inicial dos pacientes">
+          <div>
+            <div class="vocab-term">baseline characteristics</div>
+            <div class="vocab-meaning">características basais dos pacientes</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Artigo Científico</span>
+            <button class="audio-btn" onclick="speak('baseline characteristics')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="cohort" data-trans="coorte grupo de estudo">
+          <div>
+            <div class="vocab-term">cohort</div>
+            <div class="vocab-meaning">coorte (grupo acompanhado)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Artigo Científico</span>
+            <button class="audio-btn" onclick="speak('cohort')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="incidence" data-trans="incidência novos casos">
+          <div>
+            <div class="vocab-term">incidence</div>
+            <div class="vocab-meaning">incidência (taxa de novos casos)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Artigo Científico</span>
+            <button class="audio-btn" onclick="speak('incidence')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="randomized controlled trial RCT" data-trans="ensaio clínico randomizado ensaio randomizado">
+          <div>
+            <div class="vocab-term">Randomized Controlled Trial (RCT)</div>
+            <div class="vocab-meaning">ensaio clínico randomizado</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Artigo Científico</span>
+            <button class="audio-btn" onclick="speak('randomized controlled trial')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="blind study double-blind" data-trans="estudo duplo-cego cegamento">
+          <div>
+            <div class="vocab-term">double-blind study</div>
+            <div class="vocab-meaning">estudo duplo-cego</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Artigo Científico</span>
+            <button class="audio-btn" onclick="speak('double blind study')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="relative risk RR" data-trans="risco relativo">
+          <div>
+            <div class="vocab-term">relative risk (RR)</div>
+            <div class="vocab-meaning">risco relativo</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Bioestatística</span>
+            <button class="audio-btn" onclick="speak('relative risk')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="odds ratio OR" data-trans="razão de chances odds ratio">
+          <div>
+            <div class="vocab-term">odds ratio (OR)</div>
+            <div class="vocab-meaning">razão de chances</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Bioestatística</span>
+            <button class="audio-btn" onclick="speak('odds ratio')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="confidence interval CI" data-trans="intervalo de confiança IC">
+          <div>
+            <div class="vocab-term">95% confidence interval (CI)</div>
+            <div class="vocab-meaning">intervalo de confiança de 95%</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Bioestatística</span>
+            <button class="audio-btn" onclick="speak('confidence interval')">🔊</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab 4: Artigos Médicos (IMRAD & SBAR) -->
+    <div id="tab-articles" class="tab-content">
+      
+      <!-- IMRAD Card -->
+      <div class="section-card">
+        <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>📑</span> Estrutura IMRAD para Artigos de Alto Impacto (NEJM, Lancet, JAMA)
+        </h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;">
+          Nas sextas e sábados, você disseca artigos científicos reais com o Claude. O método IMRAD organiza o raciocínio em 4 perguntas fundamentais:
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius-sm);">
+            <div style="color: #38bdf8; font-weight: 700; font-size: 13px;">1. Introduction / Background</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">Qual é a lacuna no conhecimento médico? Por que essa pesquisa foi necessária?</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius-sm);">
+            <div style="color: #38bdf8; font-weight: 700; font-size: 13px;">2. Methods</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">Qual foi o delineamento? Critérios de inclusão/exclusão, dosagem, randomização e controle.</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius-sm);">
+            <div style="color: #38bdf8; font-weight: 700; font-size: 13px;">3. Results</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">Houve significância estatística? Qual foi o desfecho primário? Hazard Ratio, p-value e CI.</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius-sm);">
+            <div style="color: #38bdf8; font-weight: 700; font-size: 13px;">4. Discussion & Conclusion</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">Quais são os vieses e limitações? Como esse achado altera a conduta à beira do leito?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SBAR Handover Card -->
+      <div class="section-card" style="margin-bottom: 0;">
+        <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>🩺</span> Passagem de Plantão Estruturada • Técnica SBAR
+        </h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;">
+          Padrão internacional de comunicação clínica utilizado em hospitais nos EUA e Europa (treinado a partir da Fase 4):
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius-sm);">
+            <div style="color: #10b981; font-weight: 700; font-size: 13px;">S • Situation</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">Quem é o paciente, localização (leito/enfermaria) e o problema atual agudo.</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius-sm);">
+            <div style="color: #10b981; font-weight: 700; font-size: 13px;">B • Background</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">Diagnóstico de admissão, comorbidades relevantes e medicações em uso.</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius-sm);">
+            <div style="color: #10b981; font-weight: 700; font-size: 13px;">A • Assessment</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">Sinais vitais recentes, exames alterados e sua impressão clínica do caso.</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius-sm);">
+            <div style="color: #10b981; font-weight: 700; font-size: 13px;">R • Recommendation</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">O que precisa ser feito agora? Exames pendentes, prescrição ou monitorização.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      Dashboard gerado pelo Secretário Antigravity • Sincronizado com <code>registro-aulas.md</code> do Rafael • Google Drive
+    </footer>
+
+  </div>
+
+  <script>
+    // Tab switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      const target = document.getElementById('tab-' + tabId);
+      if (target) {
+        target.classList.add('active');
+      }
+      
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+      if (activeBtn) {
+        activeBtn.classList.add('active');
+      }
+    }
+
+    // Pronunciation with Web Speech API
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Pronúncia: " + text);
+      }
+    }
+
+    // Real-time vocabulary search
+    function filterVocab() {
+      const q = document.getElementById('vocabSearch').value.toLowerCase();
+      const cards = document.querySelectorAll('.vocab-card');
+      
+      cards.forEach(card => {
+        const term = card.getAttribute('data-term').toLowerCase();
+        const trans = card.getAttribute('data-trans').toLowerCase();
+        if (term.includes(q) || trans.includes(q)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+<script id="registro-aulas-data" type="text/markdown">
+# Registro de Aulas - Rafael
+
+</script>
+<script src="dashboard-engine.js"></script>
+</body>
+</html>

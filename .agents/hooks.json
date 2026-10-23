@@ -1,0 +1,17 @@
+{
+  "auto-sync-dashboard": {
+    "enabled": true,
+    "PostToolUse": [
+      {
+        "matcher": "replace_file_content|multi_replace_file_content|write_to_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ..\\sync_dashboards.py --hook",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

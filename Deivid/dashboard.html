@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard de Evolução em Inglês • Deivid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-card: #151d30;
+      --surface-hover: #1e293b;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(16, 185, 129, 0.4);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --accent: #10b981;
+      --accent-glow: rgba(16, 185, 129, 0.25);
+      --teal: #06b6d4;
+      --indigo: #6366f1;
+      --purple: #8b5cf6;
+      --amber: #f59e0b;
+      --amber-bg: rgba(245, 158, 11, 0.12);
+      --rose: #f43f5e;
+      --rose-bg: rgba(244, 63, 94, 0.12);
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at 15% 15%, #0f1c30 0%, #090d16 60%, #06090e 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* Top Bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .brand-info h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-physio {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .brand-info p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .streak-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .streak-fire {
+      color: #fb923c;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    /* Metric Cards Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .metric-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .metric-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--metric-color, var(--accent));
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .metric-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .metric-sub {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    /* Journey Roadmap (Fases) */
+    .section-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .phases-track {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .phase-card {
+      background: rgba(17, 24, 39, 0.7);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .phase-card.active {
+      border-color: rgba(16, 185, 129, 0.5);
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(17, 24, 39, 0.8) 100%);
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.1);
+    }
+
+    .phase-card.locked {
+      opacity: 0.6;
+    }
+
+    .phase-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .phase-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    .phase-card.active .phase-tag {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+
+    .phase-name {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .phase-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #06b6d4);
+      border-radius: 6px;
+      transition: width 0.5s ease;
+    }
+
+    /* Week Routine Bar */
+    .week-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 800px) {
+      .week-days {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .day-slot {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 10px;
+      text-align: center;
+      position: relative;
+    }
+
+    .day-slot.completed {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .day-slot.today {
+      border-color: #38bdf8;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    }
+
+    .day-name {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    .day-topic {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .day-status {
+      font-size: 11px;
+      margin-top: 6px;
+      display: inline-block;
+    }
+
+    /* Navigation Tabs */
+    .tabs-nav {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .tab-btn.active {
+      color: #fff;
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Class Cards */
+    .class-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 16px;
+      transition: all 0.2s;
+    }
+
+    .class-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .class-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .class-number {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .class-date {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .class-block {
+      margin-bottom: 14px;
+    }
+
+    .class-block-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+
+    .topic-list {
+      list-style: none;
+    }
+
+    .topic-list li {
+      font-size: 13px;
+      color: #cbd5e1;
+      padding: 4px 0;
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .topic-list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .word-badge {
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      color: #38bdf8;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .word-badge:hover {
+      background: rgba(6, 182, 212, 0.25);
+    }
+
+    /* Mistake Radar */
+    .mistake-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .mistake-content {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .mistake-wrong {
+      color: #f87171;
+      text-decoration: line-through;
+      font-size: 13px;
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    .mistake-correct {
+      color: #34d399;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .mistake-why {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .status-badge.attention {
+      background: var(--amber-bg);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .status-badge.mastered {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    /* Vocab Search */
+    .search-box {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box:focus {
+      border-color: var(--accent);
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .vocab-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .vocab-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .vocab-term {
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .vocab-meaning {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .vocab-type {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-dim);
+    }
+
+    .audio-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .audio-btn:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    /* Sync Bar */
+    .sync-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+      transition: border-color 0.2s;
+    }
+    .sync-bar:hover {
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    .sync-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .sync-dot {
+      font-size: 14px;
+      line-height: 1;
+    }
+    .sync-dot.live {
+      color: #10b981;
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+    }
+    .sync-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-sync {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-sync:hover {
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+    .btn-sync-refresh {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-sync-refresh:hover {
+      color: #fff;
+      border-color: var(--accent);
+      transform: rotate(90deg);
+    }
+    .drop-zone-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(9, 13, 22, 0.92);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border: 3px dashed var(--accent);
+      margin: 16px;
+      border-radius: var(--radius-lg);
+    }
+    .drop-zone-overlay.active {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Overlay para Drag & Drop de arquivo -->
+  <div class="drop-zone-overlay" id="dropOverlay">
+    <div style="font-size: 48px; margin-bottom: 12px;">📥</div>
+    <div style="font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px;">Solte o arquivo registro-aulas.md aqui</div>
+    <div style="font-size: 14px; color: var(--text-muted);">O dashboard atualizará instantaneamente em tempo real!</div>
+  </div>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="avatar-icon">🩺</div>
+        <div class="brand-info">
+          <h1>Deivid <span class="badge-physio">Fisioterapia • UFTM</span></h1>
+          <p>Plano de Fluência & Leitura Científica • 24 Semanas</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="streak-pill">
+          <span class="streak-fire">🔥</span>
+          <span><strong>2 dias seguidos</strong> de prática oral</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Barra de Sincronização Automática com registro-aulas.md -->
+    <div class="sync-bar" id="syncBar">
+      <div class="sync-status">
+        <span class="sync-dot live" id="syncDot">●</span>
+        <span id="syncText">Sincronizado com <code>registro-aulas.md</code></span>
+      </div>
+      <div class="sync-actions">
+        <button class="btn-sync" onclick="triggerFileSelect()">📂 Conectar registro-aulas.md</button>
+        <button class="btn-sync-refresh" onclick="reloadRegistration()" title="Recarregar">🔄</button>
+        <input type="file" id="fileInput" accept=".md" style="display: none;" onchange="handleFileSelected(event)">
+      </div>
+    </div>
+
+    <!-- Top Metrics -->
+    <div class="metrics-grid">
+      <div class="metric-card" style="--metric-color: #10b981;">
+        <div class="metric-label">Progresso Geral <span>📊</span></div>
+        <div class="metric-value">Aula 2 <span style="font-size: 16px; font-weight: 500; color: var(--text-muted);">/ 144</span></div>
+        <div class="metric-sub">Semana 1 de 24 (Fase 1: Fundamentos)</div>
+      </div>
+
+      <div class="metric-card" style="--metric-color: #06b6d4;">
+        <div class="metric-label">Vocabulário Ativo <span>📚</span></div>
+        <div class="metric-value">16 <span style="font-size: 16px; font-weight: 500; color: var(--text-muted);">palavras</span></div>
+        <div class="metric-sub">Anatomia, ambiente clínico & cotidiano</div>
+      </div>
+
+      <div class="metric-card" style="--metric-color: #f59e0b;">
+        <div class="metric-label">Pontos de Atenção <span>🎯</span></div>
+        <div class="metric-value">7 <span style="font-size: 16px; font-weight: 500; color: var(--text-muted);">identificados</span></div>
+        <div class="metric-sub">Em processo de fixação com Claude</div>
+      </div>
+
+      <div class="metric-card" style="--metric-color: #8b5cf6;">
+        <div class="metric-label">Próximo Marco <span>🏁</span></div>
+        <div class="metric-value">Semana 6</div>
+        <div class="metric-sub">Checagem de Nível 1 (Fisioterapia + Cotidiano)</div>
+      </div>
+    </div>
+
+    <!-- 4 Phases Journey -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <span>🗺️</span> Trilha de 24 Semanas (4 Fases de Evolução)
+        </div>
+        <span style="font-size: 13px; color: var(--accent); font-weight: 600;">Fase Atual: Fase 1 (Semanas 1-6)</span>
+      </div>
+
+      <div class="phases-track">
+        
+        <!-- Fase 1 -->
+        <div class="phase-card active">
+          <div class="phase-top">
+            <span class="phase-tag">Fase 1 • Semanas 1 a 6</span>
+            <span style="font-size: 12px; color: #34d399; font-weight: 700;">EM ANDAMENTO</span>
+          </div>
+          <div class="phase-name">Fundamentos da Saúde</div>
+          <div class="phase-desc">Frases curtas, partes do corpo, sintomas iniciais e apoio em português.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-dim); margin-top: 10px;">
+            <span>Aulas concluídas: 2 / 36</span>
+            <span>6%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 6%;"></div>
+          </div>
+        </div>
+
+        <!-- Fase 2 -->
+        <div class="phase-card locked">
+          <div class="phase-top">
+            <span class="phase-tag">Fase 2 • Semanas 7 a 12</span>
+            <span style="font-size: 12px; color: var(--text-dim);">🔒 Bloqueada</span>
+          </div>
+          <div class="phase-name">Expressão Clínica</div>
+          <div class="phase-desc">Avaliação cinético-funcional, descrição de dor precisa e menos português.</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Fase 3 -->
+        <div class="phase-card locked">
+          <div class="phase-top">
+            <span class="phase-tag">Fase 3 • Semanas 13 a 18</span>
+            <span style="font-size: 12px; color: var(--text-dim);">🔒 Bloqueada</span>
+          </div>
+          <div class="phase-name">Raciocínio Clínico</div>
+          <div class="phase-desc">Justificativas clínicas, leitura de Methods/Results e fluência intermediária.</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Fase 4 -->
+        <div class="phase-card locked">
+          <div class="phase-top">
+            <span class="phase-tag">Fase 4 • Semanas 19 a 24</span>
+            <span style="font-size: 12px; color: var(--text-dim);">🔒 Bloqueada</span>
+          </div>
+          <div class="phase-name">Autonomia & PBE</div>
+          <div class="phase-desc">Conversação 100% em inglês, debate técnico e leitura fluida no PubMed.</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Weekly Schedule Strip -->
+      <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border);">
+        <div style="font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">
+          Rotina Semanal Fixa • Semana 1
+        </div>
+        <div class="week-days">
+          <div class="day-slot">
+            <div class="day-name">Segunda</div>
+            <div class="day-topic">Cotidiano</div>
+            <div class="day-status" style="color: var(--text-dim);">Início do ciclo</div>
+          </div>
+          <div class="day-slot completed">
+            <div class="day-name">Terça</div>
+            <div class="day-topic">Apresentação & To Be</div>
+            <div class="day-status" style="color: #34d399; font-weight: 700;">✓ Aula 1 Feita</div>
+          </div>
+          <div class="day-slot completed">
+            <div class="day-name">Quarta</div>
+            <div class="day-topic">Partes do Corpo</div>
+            <div class="day-status" style="color: #34d399; font-weight: 700;">✓ Aula 2 Feita</div>
+          </div>
+          <div class="day-slot today">
+            <div class="day-name">Quinta</div>
+            <div class="day-topic">Cotidiano & Prática</div>
+            <div class="day-status" style="color: #38bdf8; font-weight: 700;">▶ Próxima Aula</div>
+          </div>
+          <div class="day-slot">
+            <div class="day-name">Sexta</div>
+            <div class="day-topic">Artigo Parte 1 (Abstract)</div>
+            <div class="day-status" style="color: var(--text-dim);">PubMed</div>
+          </div>
+          <div class="day-slot">
+            <div class="day-name">Sábado</div>
+            <div class="day-topic">Artigo Parte 2 & Revisão</div>
+            <div class="day-status" style="color: var(--text-dim);">Fechamento</div>
+          </div>
+          <div class="day-slot">
+            <div class="day-name">Domingo</div>
+            <div class="day-topic">Folga Total</div>
+            <div class="day-status" style="color: var(--text-dim);">Descanso</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Main Tabs Navigation -->
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab('classes')">📖 Histórico das Aulas</button>
+      <button class="tab-btn" onclick="switchTab('radar')">🎯 Radar de Erros & Padrões (7)</button>
+      <button class="tab-btn" onclick="switchTab('vocab')">🔤 Banco de Vocabulário (16)</button>
+      <button class="tab-btn" onclick="switchTab('grammar')">📐 Trilha de Gramática & Artigos</button>
+    </div>
+
+    <!-- Tab 1: Histórico das Aulas -->
+    <div id="tab-classes" class="tab-content active">
+      
+      <!-- Aula 2 -->
+      <div class="class-card">
+        <div class="class-head">
+          <div>
+            <div class="class-number">Aula 2 • Fisioterapia: Partes do Corpo e Vocabulário Clínico</div>
+            <div class="class-date">Quarta-feira, 21/10/2026 • Fase 1 (Semana 1) • Professor: Claude</div>
+          </div>
+          <span class="badge-physio">Saúde & Reabilitação</span>
+        </div>
+
+        <div class="class-block">
+          <div class="class-block-title">Estruturas & Gramática Aplicada</div>
+          <ul class="topic-list">
+            <li><strong>Construção Noun + Noun:</strong> Substantivo descrevendo substantivo sem "at" (ex: <em>physical therapy student, math teacher, hospital room</em>).</li>
+            <li><strong>Instituição/Local com "At":</strong> Uso correto de <em>student at UFTM</em>.</li>
+            <li><strong>Verbo "to be" obrigatório:</strong> Antes de sentimentos, adjetivos e "-ing" (<em>I am feeling pain</em>, não omita o <em>am</em>).</li>
+            <li><strong>Verbo "hurt" (doer) vs Substantivo "pain" (dor):</strong> Diferença entre <em>it hurts</em> e <em>I have pain</em>.</li>
+            <li><strong>Concordância verbal com partes do corpo:</strong> Singular leva "s" (<em>my shoulder hurts</em>); Plural não leva (<em>my feet hurt, my arms hurt</em>).</li>
+            <li><strong>Intensificador de ação:</strong> <em>A lot</em> usado com verbos (<em>it hurts a lot</em>), e não <em>very hurt</em>.</li>
+          </ul>
+        </div>
+
+        <div class="class-block">
+          <div class="class-block-title">Palavras Novas Desta Aula</div>
+          <div class="tag-container">
+            <span class="word-badge" onclick="speak('arm')">🔊 arm (braço)</span>
+            <span class="word-badge" onclick="speak('leg')">🔊 leg (perna)</span>
+            <span class="word-badge" onclick="speak('head')">🔊 head (cabeça)</span>
+            <span class="word-badge" onclick="speak('back')">🔊 back (costas)</span>
+            <span class="word-badge" onclick="speak('shoulder')">🔊 shoulder (ombro)</span>
+            <span class="word-badge" onclick="speak('knee')">🔊 knee (joelho)</span>
+            <span class="word-badge" onclick="speak('foot and feet')">🔊 foot / feet (pé / pés)</span>
+            <span class="word-badge" onclick="speak('hurt')">🔊 hurt (doer)</span>
+            <span class="word-badge" onclick="speak('pain')">🔊 pain (dor)</span>
+            <span class="word-badge" onclick="speak('a lot')">🔊 a lot (muito - verbos)</span>
+          </div>
+        </div>
+
+        <div class="class-block" style="margin-bottom: 0;">
+          <div class="class-block-title">Destaque de Evolução do Dia</div>
+          <p style="font-size: 13px; color: #94a3b8; background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: var(--radius-sm); border-left: 3px solid var(--accent);">
+            🚀 <strong>Ponto alto:</strong> Entendeu a lógica estrutural de substantivos compostos (<em>noun + noun</em>), memorizou o vocabulário anatômico com agilidade e encerrou a sessão formulando frases completas e complexas: <em>"My shoulder, my back, and my arms hurt a lot"</em>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Aula 1 -->
+      <div class="class-card">
+        <div class="class-head">
+          <div>
+            <div class="class-number">Aula 1 • Cotidiano: Apresentação Pessoal & Rotina</div>
+            <div class="class-date">Terça-feira, 20/10/2026 • Fase 1 (Semana 1) • Professor: Claude</div>
+          </div>
+          <span style="font-size: 11px; font-weight: 600; background: rgba(99, 102, 241, 0.15); color: #818cf8; padding: 3px 9px; border-radius: 20px; border: 1px solid rgba(99, 102, 241, 0.3);">Cotidiano</span>
+        </div>
+
+        <div class="class-block">
+          <div class="class-block-title">Estruturas & Gramática Aplicada</div>
+          <ul class="topic-list">
+            <li><strong>Apresentação completa:</strong> Nome, nacionalidade, cidade, idade e status estudantil (<em>I am a... student / I am 25 years old</em>).</li>
+            <li><strong>Verbo "to be" duplo sentido:</strong> "Ser" e "Estar" com o mesmo verbo.</li>
+            <li><strong>Phrasal verb "work out" vs "work":</strong> Treinar/malhar vs trabalhar.</li>
+            <li><strong>Dois usos de "To":</strong> Conectar dois verbos (<em>like to go</em>) e destino (<em>go to the movies</em>).</li>
+            <li><strong>Any vs Some:</strong> <em>Any</em> para negativas e perguntas; <em>Some</em> para afirmativas.</li>
+            <li><strong>Negativa no presente:</strong> <em>Don't + verbo puro</em> (<em>I don't have, I don't like</em>).</li>
+          </ul>
+        </div>
+
+        <div class="class-block">
+          <div class="class-block-title">Palavras Novas Desta Aula</div>
+          <div class="tag-container">
+            <span class="word-badge" onclick="speak('gym')">🔊 gym (academia)</span>
+            <span class="word-badge" onclick="speak('work out')">🔊 work out (malhar)</span>
+            <span class="word-badge" onclick="speak('movies')">🔊 movies / cinema</span>
+            <span class="word-badge" onclick="speak('anything')">🔊 anything (qualquer coisa/nada)</span>
+            <span class="word-badge" onclick="speak('something')">🔊 something (alguma coisa)</span>
+            <span class="word-badge" onclick="speak('else')">🔊 else (mais / outro)</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tab 2: Radar de Erros -->
+    <div id="tab-radar" class="tab-content">
+      <div style="margin-bottom: 20px;">
+        <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">Monitor de Correções & Fixação</h3>
+        <p style="font-size: 13px; color: var(--text-muted);">
+          Cada erro registrado é uma oportunidade de ouro. Quando você acertar 3 vezes consecutivas nas aulas de voz com o Claude, o status vira <strong>Superado</strong>.
+        </p>
+      </div>
+
+      <!-- Erro 1 -->
+      <div class="mistake-card">
+        <div class="mistake-content">
+          <div>
+            <span class="mistake-wrong">"I am psychotherapy student"</span>
+            <span class="mistake-correct">"I am a physical therapy student at UFTM"</span>
+          </div>
+          <div class="mistake-why">
+            ⚠️ <strong>Atenção fonética recorrente:</strong> Não confunda <em>Physical therapy</em> (fisioterapia) com <em>Psychotherapy</em> (psicoterapia). Lembre-se também do artigo <em>"a"</em> antes da profissão.
+          </div>
+        </div>
+        <span class="status-badge attention">🟡 Atenção Alta (2x)</span>
+      </div>
+
+      <!-- Erro 2 -->
+      <div class="mistake-card">
+        <div class="mistake-content">
+          <div>
+            <span class="mistake-wrong">"I feeling pain in my back"</span>
+            <span class="mistake-correct">"I am feeling pain in my back"</span>
+          </div>
+          <div class="mistake-why">
+            ⚠️ <strong>Omissão do "to be":</strong> Nunca use o verbo com <em>-ing</em> sozinho sem o verbo auxiliar <em>am / is / are</em>.
+          </div>
+        </div>
+        <span class="status-badge attention">🟡 Em Treino</span>
+      </div>
+
+      <!-- Erro 3 -->
+      <div class="mistake-card">
+        <div class="mistake-content">
+          <div>
+            <span class="mistake-wrong">"My feet hurts"</span>
+            <span class="mistake-correct">"My feet hurt" (Plural: sem 's' no verbo)</span>
+          </div>
+          <div class="mistake-why">
+            ⚠️ <strong>Plural irregular:</strong> <em>Foot</em> (singular leva 's': <em>my foot hurts</em>); <em>Feet</em> (plural não leva 's': <em>my feet hurt</em>).
+          </div>
+        </div>
+        <span class="status-badge attention">🟡 Em Fixação</span>
+      </div>
+
+      <!-- Erro 4 -->
+      <div class="mistake-card">
+        <div class="mistake-content">
+          <div>
+            <span class="mistake-wrong">"Very hurt"</span>
+            <span class="mistake-correct">"It hurts a lot"</span>
+          </div>
+          <div class="mistake-why">
+            ⚠️ <strong>Very vs A lot:</strong> <em>Very</em> intensifica adjetivos (<em>very tired</em>). Para verbos de ação/sensação, use <em>a lot</em> (<em>hurts a lot</em>).
+          </div>
+        </div>
+        <span class="status-badge attention">🟡 Em Fixação</span>
+      </div>
+
+      <!-- Erro 5 -->
+      <div class="mistake-card">
+        <div class="mistake-content">
+          <div>
+            <span class="mistake-wrong">"My shoulder fit"</span>
+            <span class="mistake-correct">"My shoulder hurts"</span>
+          </div>
+          <div class="mistake-why">
+            ⚠️ <strong>Confusão fonética:</strong> <em>Fit</em> (em boa forma/caber) vs <em>Hurt</em> (doer). Treinar a vogal aberta de <em>hurt</em>.
+          </div>
+        </div>
+        <span class="status-badge attention">🟡 Fonética</span>
+      </div>
+
+      <!-- Erro 6 -->
+      <div class="mistake-card">
+        <div class="mistake-content">
+          <div>
+            <span class="mistake-wrong">"fifteen five"</span>
+            <span class="mistake-correct">"twenty-five" (25)</span>
+          </div>
+          <div class="mistake-why">
+            ⚠️ <strong>Números compostos:</strong> Dezenas terminam em <em>-ty</em> (twenty, thirty, forty), nunca repetir <em>-teen</em>.
+          </div>
+        </div>
+        <span class="status-badge mastered">🟢 Superado</span>
+      </div>
+
+      <!-- Erro 7 -->
+      <div class="mistake-card">
+        <div class="mistake-content">
+          <div>
+            <span class="mistake-wrong">"I don't have sister"</span>
+            <span class="mistake-correct">"I don't have any brothers or sisters"</span>
+          </div>
+          <div class="mistake-why">
+            ⚠️ <strong>Any em negativas:</strong> Uso natural de <em>any</em> quando não possuímos nenhum item na frase negativa.
+          </div>
+        </div>
+        <span class="status-badge mastered">🟢 Superado</span>
+      </div>
+
+    </div>
+
+    <!-- Tab 3: Vocabulário Completo -->
+    <div id="tab-vocab" class="tab-content">
+      <input type="text" class="search-box" id="vocabSearch" placeholder="🔍 Buscar palavra ou significado em português..." onkeyup="filterVocab()">
+
+      <div class="vocab-grid" id="vocabGrid">
+        
+        <!-- Fisioterapia -->
+        <div class="vocab-card" data-term="arm" data-trans="braço">
+          <div>
+            <div class="vocab-term">arm</div>
+            <div class="vocab-meaning">braço</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Anatomia</span>
+            <button class="audio-btn" onclick="speak('arm')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="leg" data-trans="perna">
+          <div>
+            <div class="vocab-term">leg</div>
+            <div class="vocab-meaning">perna</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Anatomia</span>
+            <button class="audio-btn" onclick="speak('leg')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="head" data-trans="cabeça">
+          <div>
+            <div class="vocab-term">head</div>
+            <div class="vocab-meaning">cabeça</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Anatomia</span>
+            <button class="audio-btn" onclick="speak('head')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="back" data-trans="costas">
+          <div>
+            <div class="vocab-term">back</div>
+            <div class="vocab-meaning">costas</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Anatomia</span>
+            <button class="audio-btn" onclick="speak('back')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="shoulder" data-trans="ombro">
+          <div>
+            <div class="vocab-term">shoulder</div>
+            <div class="vocab-meaning">ombro</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Anatomia</span>
+            <button class="audio-btn" onclick="speak('shoulder')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="knee" data-trans="joelho">
+          <div>
+            <div class="vocab-term">knee</div>
+            <div class="vocab-meaning">joelho (k mudo)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Anatomia</span>
+            <button class="audio-btn" onclick="speak('knee')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="foot feet" data-trans="pé pés">
+          <div>
+            <div class="vocab-term">foot / feet</div>
+            <div class="vocab-meaning">pé / pés</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Anatomia</span>
+            <button class="audio-btn" onclick="speak('foot and feet')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="hurt" data-trans="doer">
+          <div>
+            <div class="vocab-term">hurt</div>
+            <div class="vocab-meaning">doer (verbo)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Clínico</span>
+            <button class="audio-btn" onclick="speak('hurt')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="pain" data-trans="dor">
+          <div>
+            <div class="vocab-term">pain</div>
+            <div class="vocab-meaning">dor (substantivo)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Clínico</span>
+            <button class="audio-btn" onclick="speak('pain')">🔊</button>
+          </div>
+        </div>
+
+        <!-- Cotidiano -->
+        <div class="vocab-card" data-term="work out" data-trans="malhar treinar">
+          <div>
+            <div class="vocab-term">work out</div>
+            <div class="vocab-meaning">malhar / treinar</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Rotina</span>
+            <button class="audio-btn" onclick="speak('work out')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="gym" data-trans="academia">
+          <div>
+            <div class="vocab-term">gym</div>
+            <div class="vocab-meaning">academia</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Rotina</span>
+            <button class="audio-btn" onclick="speak('gym')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="movies" data-trans="cinema">
+          <div>
+            <div class="vocab-term">movies</div>
+            <div class="vocab-meaning">cinema</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Lazer</span>
+            <button class="audio-btn" onclick="speak('movies')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="anything" data-trans="qualquer coisa nada">
+          <div>
+            <div class="vocab-term">anything</div>
+            <div class="vocab-meaning">qualquer coisa / nada</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Gramática</span>
+            <button class="audio-btn" onclick="speak('anything')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="something" data-trans="alguma coisa">
+          <div>
+            <div class="vocab-term">something</div>
+            <div class="vocab-meaning">alguma coisa</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Gramática</span>
+            <button class="audio-btn" onclick="speak('something')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="else" data-trans="mais outro">
+          <div>
+            <div class="vocab-term">else</div>
+            <div class="vocab-meaning">mais / outro (anything else)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Estrutura</span>
+            <button class="audio-btn" onclick="speak('anything else')">🔊</button>
+          </div>
+        </div>
+
+        <div class="vocab-card" data-term="a lot" data-trans="muito">
+          <div>
+            <div class="vocab-term">a lot</div>
+            <div class="vocab-meaning">muito (com verbos)</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="vocab-type">Intensificador</span>
+            <button class="audio-btn" onclick="speak('a lot')">🔊</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab 4: Trilha de Gramática & Artigos -->
+    <div id="tab-grammar" class="tab-content">
+      <div class="section-card">
+        <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;">🔬 Preparação para Artigos Científicos (Sexta & Sábado)</h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Na sexta-feira (Aula 4), você iniciará a leitura do primeiro <strong>Abstract</strong> de Fisioterapia no PubMed com o Claude. Aqui está a bússola estrutural que você vai usar:
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 12px; border-radius: var(--radius-sm);">
+            <div style="color: #38bdf8; font-weight: 700; font-size: 13px;">1. Introduction / Background</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">Qual o problema clínico? Por que o estudo foi feito?</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 12px; border-radius: var(--radius-sm);">
+            <div style="color: #38bdf8; font-weight: 700; font-size: 13px;">2. Methods</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">Quem foram os pacientes? Qual foi o exercício ou intervenção?</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 12px; border-radius: var(--radius-sm);">
+            <div style="color: #38bdf8; font-weight: 700; font-size: 13px;">3. Results</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">A dor diminuiu? A amplitude de movimento melhorou?</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 12px; border-radius: var(--radius-sm);">
+            <div style="color: #38bdf8; font-weight: 700; font-size: 13px;">4. Conclusion</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">O que isso muda na prática clínica do fisioterapeuta?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      Dashboard gerado pelo Secretário Antigravity • Sincronizado com <code>registro-aulas.md</code> • Google Drive
+    </footer>
+
+  </div>
+
+  <script>
+    // Tab switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      const target = document.getElementById('tab-' + tabId);
+      if (target) {
+        target.classList.add('active');
+      }
+      
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+      if (activeBtn) {
+        activeBtn.classList.add('active');
+      }
+    }
+
+    // Pronunciation with Web Speech API
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Pronúncia: " + text);
+      }
+    }
+
+    // Real-time vocabulary search
+    function filterVocab() {
+      const q = document.getElementById('vocabSearch').value.toLowerCase();
+      const cards = document.querySelectorAll('.vocab-card');
+      
+      cards.forEach(card => {
+        const term = card.getAttribute('data-term').toLowerCase();
+        const trans = card.getAttribute('data-trans').toLowerCase();
+        if (term.includes(q) || trans.includes(q)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+<script id="registro-aulas-data" type="text/markdown">
+# Registro de Aulas de Inglês do Deivid
+
+## Semana 1
+
+### Aula 1 - Terça-feira, 20/10/2026 (Fase 1 - Cotidiano: apresentações pessoais)
+
+**Temas cobertos:**
+- Apresentação pessoal completa: nome, nacionalidade, cidade, profissão, idade (My name is / I am from / I live in / I am a... student / I am ... years old)
+- Verbo "to be" com dois sentidos (ser e estar)
+- Falar sobre irmãos com "have" em frase negativa
+- Tempo livre: play games, go to the gym, work out, study, go to the movies/cinema
+- Phrasal verb: "work out" (malhar) vs "work" (trabalhar)
+- "To" com dois usos: conectando dois verbos (like to go) e indicando destino (go to the movies)
+- Uso de "any" em frases negativas (any brothers, anything else) vs "a"/nada em afirmativas
+- "Something" (afirmativa) vs "anything" (pergunta/negativa)
+- "Anything else" / "something else" = mais alguma coisa / outra coisa
+- Estrutura "don't/doesn't + verbo puro, sem to" (I don't do, I don't like, I don't have)
+
+**Palavras novas:**
+- gym (academia), work out (malhar/treinar), movies/cinema (cinema), anything (qualquer coisa/nada), something (alguma coisa), else (mais/outro)
+
+**Erros comuns registrados:**
+- Confundiu "physical therapy" (fisioterapia) com "psychotherapy" (psicoterapia) - atenção à pronúncia parecida
+- Esqueceu o artigo "a" antes de profissão (ex: "a physical therapy student")
+- Números compostos: disse "fifteen five" ao invés de "twenty-five" - atenção à formação de números compostos (vinte e cinco = twenty-five, não repete "teen")
+- Frase negativa sem "any": disse "I don't have sister and brothers" ao invés de "I don't have any brothers or sisters"
+- Disse "any else" ao invés de "anything else" (esqueceu de completar "any" com "thing" quando é genérico)
+- Confundiu "gym" (academia) com "gin" (bebida) - atenção à pronúncia parecida
+
+**Observações:**
+- Deivid demonstrou boa curiosidade gramatical, perguntando bastante sobre o porquê das estruturas (any/anything, to do, phrasal verbs, substantivos). Pediu para explorar o verbo "to be" (am/is/are) em uma aula futura dedicada à gramática.
+- Primeira aula, nível inicial confirmado como Fase 1.
+
+## Semana 1
+
+### Aula 2 - Quarta-feira, 21/10/2026 (Fase 1 - Fisioterapia: partes do corpo e vocabulário básico)
+
+**Temas cobertos:**
+- Construção "substantivo + student" para indicar curso (physical therapy student), sem usar "at" nesse caso
+- "At" usado para indicar instituição/local (student at UFTM)
+- Diferença entre "I'm a physical therapy student" e "I'm a student of physical therapy" (duas formas corretas, a primeira mais natural)
+- Substantivos funcionando como adjetivo (noun + noun): math teacher, coffee cup, soccer player, hospital room
+- Verbo "to be" (am/is/are) obrigatório antes de adjetivo, substantivo ou verbo terminado em "-ing" (ex: I am tired, I am a student, I am feeling pain)
+- Partes do corpo: arm(s), leg(s), head, back, shoulder, knee, foot/feet (plural irregular)
+- Verbo "to hurt" (doer) vs substantivo "pain" (dor): "it hurts" vs "I have pain"
+- Concordância verbal com "hurt": singular leva "s" (shoulder hurts), plural não leva (feet hurt, arms hurt)
+- "A lot" (muito) usado com verbos, diferente de "very" (muito), usado com adjetivos
+- Frases praticadas: "My legs are strong", "I am feeling pain in my back", "My knee hurts", "My feet hurt", "My shoulder hurts", "My shoulder, my back, and my arms hurt a lot"
+
+**Palavras novas:**
+- arm (braço), leg (perna), head (cabeça), back (costas), shoulder (ombro), knee (joelho), foot/feet (pé/pés), hurt (doer), pain (dor), a lot (muito, com verbos)
+
+**Erros observados (com correção):**
+- "I'm a student physical therapy at UFTM" → correção: "I'm a physical therapy student at UFTM" (ordem do substantivo descritivo antes de "student", sem "at" nessa posição)
+- "I am psychotherapy students at UFTM" → correção: "I am a physical therapy student at UFTM" (confundiu novamente "physical therapy" com "psychotherapy"; também esqueceu o artigo "a" e usou "students" no plural por engano)
+- "I physical therapy student at UFTM" → correção: "I'm a physical therapy student at UFTM" (omissão do verbo "to be")
+- "I feeling pain in my back" → correção: "I am feeling pain in my back" (omissão do verbo "to be" antes de verbo com "-ing"; padrão recorrente na aula, repetido 3 vezes antes de fixar)
+- "My feet hurts" → correção: "My feet hurt" (concordância verbal: "feet" já é plural, não leva "s" no verbo)
+- "My shoulder fit" → correção: "My shoulder hurts" (confusão de pronúncia/vocabulário entre "fit" e "hurt", palavras com sons parecidos mas significados bem diferentes)
+- "Very hurt" (tentando dizer "dói muito") → correção: "it hurts a lot" (confundiu "very", usado com adjetivos, com "a lot", usado com verbos)
+
+**Observações:**
+- Confusão recorrente entre "physical therapy" e "psychotherapy" segue sendo um padrão a observar (já registrado na Aula 1).
+- Dificuldade recorrente em omitir o verbo "to be" antes de adjetivos/gerúndios - ponto de atenção para o aquecimento da próxima aula.
+- Nova confusão fonética a observar: "fit" vs "hurt".
+- Pontos fortes do dia: entendeu bem a lógica de "noun + noun" (substantivo descrevendo substantivo) após exemplos variados, aprendeu rápido o vocabulário de partes do corpo e formou frases mais longas e complexas ao final (enumeração de partes do corpo com "and" e "a lot").
+
+## Semana 1
+
+### Aula 3 - Quinta-feira, 22/10/2026 (Fase 1 - Cotidiano: rotina diária) - aula de 15 min + 3 min de bônus
+
+**Temas cobertos:**
+- Aquecimento com revisão da Aula 2: "I am a physical therapy student at UFTM" e "My shoulder hurts a lot"
+- Verbo composto (phrasal verb) "wake up" (acordar), com o "up" obrigatório, como "work out"
+- Horários com "at": "I wake up at seven AM", "I have lunch at twelve", "I have dinner at eight"
+- Horário na fala do dia a dia: o inglês não usa formato 24h (18 vira "six" + PM); "PM" é opcional quando o contexto deixa claro
+- "Have" com refeições (= tomar/fazer uma refeição): I have breakfast / lunch / dinner, sem artigo ("a dinner" está errado)
+- "I have breakfast" (presente simples, rotina) vs "I have eaten breakfast" (present perfect, "já tomei"); "I eat breakfast" também é válido
+- Expressão de tempo no início da frase: "At night, I study", "After dinner, I study"
+- "After that" = depois disso ("that" é um pronome que retoma a ideia anterior); "and" liga as duas ideias: "I wake up at seven, and after that, I have breakfast"
+- Pergunta no passado: "What did you eat for breakfast?" (what = o que; for breakfast = no café da manhã) e resposta com "ate" (passado de eat)
+- "A" antes de substantivo singular contável: "a banana"
+- Frases praticadas: "I wake up at seven AM", "I have breakfast", "I have lunch at twelve", "At night, I study English", "After dinner, I study", "I have dinner at eight, and after that, I study English", "I wake up at seven, and after that, I have breakfast", "What did you eat for breakfast?", "I ate bread with eggs and a banana for breakfast"
+
+**Palavras novas:**
+- wake up (acordar), have breakfast (tomar café da manhã), have lunch (almoçar), have dinner (jantar), at night (à noite), AM / PM, after that (depois disso), after dinner (depois do jantar), ate (comi, passado de eat), for breakfast (no café da manhã), bread (pão), eggs (ovos), banana
+
+**Erros observados (com correção):**
+- "Psychotherapy study at OFTM" → correção: "I am a physical therapy student at UFTM" (3ª aula seguida com a confusão physical therapy / psychotherapy; também omitiu "I am" e "a"; corrigiu na repetição)
+- "My shoulder a lot" → autocorreção para "My shoulder hurts a lot" (omitiu o verbo "hurts"; Deivid percebeu e corrigiu sozinho)
+- "I wake at seven" → correção: "I wake up at seven" (esqueceu o "up" do phrasal verb)
+- "I have lunch. Went to..." → correção: "I have lunch at twelve" (usou passado "went" em frase de rotina, que pede presente simples)
+- "I have lunch. It's twelve." / "I have lunch. At twelve." → correção: "I have lunch at twelve" (separou a frase em duas partes; precisa juntar o "at" + horário na mesma frase)
+- "I have dinner at 18" → correção: "I have dinner at six PM" / "at eight" (usou formato 24h; no inglês falado usa-se 12h)
+- "After genie, I study" → correção: "After dinner, I study" (pronúncia de "dinner" confundida; mesmo tipo de confusão fonética de "gym"/"gin" e "fit"/"hurt")
+- "I have a dinner eight eighteen, and after that is studied English" → correção: "I have dinner at eight, and after that, I study English" (artigo "a" indevido antes de refeição, faltou "at" antes do horário, "is studied" no lugar de "I study"; corrigiu tudo na repetição por partes)
+- "I wake up at seven after that I have breakfast" → correção: "I wake up at seven, and after that, I have breakfast" (faltou o "and" ligando as duas ideias)
+- "How did you eat on breakfast?" → correção: "What did you eat for breakfast?" (usou "how" no lugar de "what" e "on" no lugar de "for")
+- "Ate in my breakfast" → correção: "I ate bread for breakfast" (preposição "for" com refeições, sem "my"; faltou o sujeito "I")
+
+**Observações:**
+- Deivid continua fazendo ótimas perguntas gramaticais: questionou o sentido literal de "I have breakfast", se não deveria ser "I have eaten breakfast" (present perfect) e pediu a explicação do "that" em "after that". Mostra bom raciocínio comparando com o português.
+- Pontos fortes do dia: (1) curiosidade e raciocínio gramatical; (2) autocorreção espontânea em "My shoulder hurts a lot" e boa evolução ao montar frases longas: no bônus, saiu de "I have a dinner eight eighteen, and after that is studied English" para a frase completa correta, e terminou com "I ate bread with eggs and a banana for breakfast" sem erros.
+- Erro-chave de pronúncia: "physical therapy" vs "psychotherapy" (aparece nas 3 aulas; no fechamento Deivid disse corretamente "Physical therapy. E não psychotherapy"). Reforçar no próximo aquecimento junto com "wake up", "at + horário" (formato 12h) e "for breakfast".
+- Padrão recorrente: omissão ou troca de preposições e conectores (at, for, and) e do verbo "to be"/sujeito; pedir frases completas.
+- Sugestão para próximas aulas: Deivid pediu aula de gramática do verbo "to be" (am/is/are); considerar encaixar em breve. Próximo tema do plano: sexta-feira, leitura de artigo parte 1 (o que é um abstract e as seções de um artigo).
+
+</script>
+<script src="dashboard-engine.js"></script>
+</body>
+</html>
