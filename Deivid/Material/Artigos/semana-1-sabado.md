@@ -1,4 +1,4 @@
-﻿# Artigo da Semana 1 - Sábado (Parte 2: Resultados e Conclusão)
+# Artigo da Semana 1 - Sábado (Parte 2: Resultados e Conclusão)
 
 - **Título:** Does the addition of manual therapy to exercise therapy improve pain and disability outcomes in chronic low back pain: A systematic review
 - **Autores:** Pirunthaban Narenthiran, Isabel Granville Smith, Frances M. K. Williams
@@ -44,3 +44,22 @@ Dez estudos clínicos preencheram os critérios da revisão, e a grande maioria 
 1. Quantos estudos foram incluídos na revisão e quantos deles relataram melhora com a adição da terapia manual?
 2. A combinação de terapia manual com exercícios trouxe melhores resultados a curto prazo (*short-term*) ou a longo prazo?
 3. O que os autores recomendam para o manejo de pacientes com dor lombar (*LBP*)?
+
+---
+
+## 🎙️ Roteiro de Discussão Clínica para a Aula de Voz (Debate do Artigo)
+*Professor: O Deivid é universitário de Fisioterapia e quer debater o conteúdo científico e a prática clínica, NÃO apenas ler frases soltas. Conduza a aula seguindo estas 4 etapas:*
+
+1. **Conexão e Aquecimento (2 min):**
+   - Conecte sexta com sábado: *"Deivid, yesterday we saw the Background: researchers wanted to know if manual therapy adds value to exercise. Today we have the results and conclusion!"*
+2. **Exploração dos Resultados (Results - 4 min):**
+   - Pergunta: *"Deivid, looking at the results: how many studies were included, and how many showed positive improvements?"*
+   - Estimule a formulação em inglês: *"Ten studies met the inclusion criteria, and eight reported improvements."*
+   - Pergunta reflexiva: *"Two studies reported no benefit. Do you think that is common in scientific literature?"*
+3. **Exploração da Conclusão e Aplicação Prática (Conclusions - 4 min):**
+   - Pergunta: *"According to the conclusion, is manual therapy recommended for short-term or long-term relief?"*
+   - Resposta esperada: *"It is recommended for short-term relief of pain and disability."*
+   - Debate clínico (opinião do Deivid): *"As a physical therapist, why do you think manual therapy helps more in the short-term, while exercise is essential for long-term recovery?"*
+   - Ajude o Deivid a expressar ideias como: *"Manual therapy reduces pain now, but exercise strengthens the muscles for the future."*
+4. **Fechamento e Síntese (2 min):**
+   - Peça para o Deivid resumir em uma frase o que ele levaria desse estudo para a prática clínica dele na UFTM.
