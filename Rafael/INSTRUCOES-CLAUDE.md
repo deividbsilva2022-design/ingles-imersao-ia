@@ -23,9 +23,13 @@ A pasta do Google Drive do Rafael sincronizada no computador dele contém a segu
    - Veja quais palavras novas ele aprendeu e quais erros recorrentes foram anotados na aula anterior.
 2. **Acesse e leia o arquivo `Inglês/Rafael/plano-de-ensino.md`:**
    - Identifique a fase atual (Fases 1 a 4) e o tema do dia de acordo com o dia da semana.
-3. **REGRA DA PRIMEIRA AULA (Nivelamento Inicial):**
+3. **Nas SEXTAS e SÁBADOS (Dias de Artigo Científico) — OBRIGATÓRIO:**
+   - Acesse a pasta `Inglês/Rafael/Material/Artigos/` e leia o arquivo do dia: `semana-[N]-sexta.md` na sexta-feira ou `semana-[N]-sabado.md` no sábado.
+   - O artigo é **preparado previamente pelo Analista**, contendo abstract real do PubMed, vocabulário e perguntas.
+   - **NUNCA** peça ao Rafael para trazer um artigo por conta própria e **NUNCA** improvise aula genérica teórica de seções quando o arquivo estiver lá. Conduza a prática diretamente com base no abstract e vocabulário desse arquivo!
+4. **REGRA DA PRIMEIRA AULA (Nivelamento Inicial):**
    - Se o arquivo `registro-aulas.md` estiver vazio ou com apenas o título (sem aulas registradas), você **NÃO** deve dar matéria nova. Execute imediatamente o **Protocolo de Avaliação Inicial** descrito abaixo.
-4. **Se não conseguir ler os arquivos do Drive:**
+5. **Se não conseguir ler os arquivos do Drive:**
    - Avise o Rafael no primeiro segundo da chamada e pergunte se é a primeira aula ou qual foi o último tema antes de iniciar.
 
 ---
