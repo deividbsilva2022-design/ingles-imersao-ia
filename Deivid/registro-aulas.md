@@ -148,3 +148,46 @@
 - Falha de processo identificada: a aula começou sem ler o artigo do dia na pasta Material/Artigos. Regra nova (do arquivo INSTRUCOES-CLAUDE.md, segundo o Deivid): nas sextas e sábados, ler o artigo do dia na pasta Inglês/Deivid/Material/Artigos/ ANTES de começar e nunca pedir para o aluno trazer um artigo. Se a conversa nova não carregar a regra, o Deivid pedirá para ler "semana-1-sabado.md".
 - Próxima aula: sábado, leitura de artigo parte 2, usar o arquivo semana-1-sabado.md (Results e Conclusions do mesmo artigo: "Ten studies met the inclusion criteria...") + revisão leve da semana. Reaproveitar do aquecimento: "therapy" (th), "investigated" (tid), "addition", "provides improvements", "outcomes".
 - Dica de uso de voz: Deivid se incomoda quando sou interrompido ou cortado enquanto fala; esperar ele terminar (combinamos que ele diz "pronto" ao final de frases longas).
+
+## Semana 1
+
+### Aula 5 - Sábado, 24/10/2026 (Fase 1 - Artigos: leitura parte 2, Results e Conclusions do artigo "Does the addition of manual therapy to exercise therapy improve pain and disability outcomes in chronic low back pain: A systematic review", 2025)
+
+**Temas cobertos:**
+- Aquecimento com revisão: "I am a physical therapy student at UFTM" (perfeito, sem confundir com psychotherapy) e "therapy" com o som de "th" (saiu correto)
+- Arquivo do dia lido ANTES da aula: semana-1-sabado.md (Results e Conclusions)
+- Frase de Results trabalhada: "Ten studies met the inclusion criteria: eight reported pain and/or disability improvements with the addition of manual therapy, two reported no benefit."
+- Frase de Conclusions trabalhada e dita sem erro: "The addition of manual therapy is recommended for at least short-term pain and disability relief."
+- "Meet" tem vários sentidos: conhecer (nice to meet you), encontrar, atender a algo (meet the criteria). "Met" = passado, vogal curta como em get/bet, sem chiado final
+- "Match" (combinar, rima com catch) é diferente de "met"
+- "Studies" (estudos) vs "students" (estudantes)
+- "Inclusion" (inclusão) vs "exclusion" (exclusão)
+- "Eight" soa como "ate" (êit); a transcrição de voz às vezes escreve "H" ou "A"
+- Ordem do adjetivo: "manual therapy" (adjetivo antes do substantivo), não "therapy manual"
+- Pergunta de compreensão: "Is manual therapy recommended for short-term pain relief?" Resposta curta: "Yes, it is. Manual therapy is recommended for short-term pain relief."
+- Revisão leve da semana: apresentação pessoal, therapy (th), addition vs addiction
+
+**Palavras novas:**
+- inclusion criteria (critérios de inclusão), exclusion (exclusão), met (passado de meet: atendeu), match (combinar), reported (relataram), benefit (benefício), adjunct (coadjuvante), short-term (curto prazo), relief (alívio), management (manejo), recommended (recomendado), at least (pelo menos), exercise alone (exercício isolado)
+
+**Erros observados (com correção):**
+- "10 students meet the exclusion criteria" → "Ten studies met the inclusion criteria" (studies vs students; met no passado; inclusion vs exclusion)
+- "Ten students met ten inclusion criteria" → "Ten studies met the inclusion criteria" (faltou "the"; "ten criteria" no lugar de "the")
+- "Ten studies match the inclusion criteria" → "met" (confundiu met/match/Matt; ajustou a vogal com a prática get, bet, met)
+- "Ten studies, meets inclusion criteria" → "Ten studies met the inclusion criteria" (colocou "s" no verbo no passado; faltou "the")
+- "Eighteen reported..." → "Eight reported..." (eight vs eighteen, erro já visto na Aula 4)
+- "two reported no benefits" → "two reported no benefit" (singular neste contexto)
+- "with addiction, addition of manual therapy" → "with the addition of manual therapy" (autocorreção; faltou "the")
+- "therapy manual" → "manual therapy" (ordem do adjetivo em inglês)
+- "Yes, this is manual therapy is recommended..." → "Yes, it is. Manual therapy is recommended for short-term pain relief." (resposta curta repete o verbo da pergunta, com "it")
+- "Gets, bets, mets" → "get, bet, met" (acrescentou "s" no final)
+- Pausas no meio da frase ("Tem studies, METs. The inclusion criteria."): em inglês a frase flui junto
+
+**Observações:**
+- Pontos fortes do dia: (1) persistência e autocorreção: insistiu na frase do artigo até dizê-la completa e correta, e se autocorrigiu em "addition"; (2) compreensão do artigo: disse a conclusão completa sem erro e respondeu a pergunta de compreensão, mostrando que entendeu o conteúdo (exercício recomendado, terapia manual recomendada para alívio de dor a curto prazo).
+- Erro-chave de pronúncia: a vogal de "met" (som de "e" como em get/bet, e não "a" de "Matt"). Também reforçar o "n" final de "ten" e as três sílabas de "studies".
+- Nota sobre a transcrição de voz: "ten" frequentemente aparece escrito como "tem", "eight" como "H", e "met" como "match". Confiar no contexto e não penalizar quando a pronúncia parecer correta.
+- Padrões recorrentes: confusões fonéticas entre palavras parecidas (gym/gin, fit/hurt, maths/methods, partitions/participants, addition/addiction, whether/weather, studies/students, met/match); verbo no passado com "s" ou sem "-ed"; omissão de "the".
+- Pedido do Deivid ainda em aberto: aula de gramática do verbo "to be" (am/is/are). Considerar encaixar na próxima semana.
+- Dica de voz: esperar Deivid terminar de falar; ele diz "pronto" ao final de frases longas. Evitar cortar a fala dele.
+- Próxima aula: segunda-feira, 26/10/2026 (Fase 1, semana 2 - Cotidiano). Reaproveitar do aquecimento: met/get/bet, "ten studies", "addition", "recommended", "relief", "eight" vs "eighteen".

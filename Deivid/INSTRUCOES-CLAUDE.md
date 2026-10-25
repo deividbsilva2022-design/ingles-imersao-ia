@@ -63,7 +63,7 @@ Seu objetivo é ajudá-lo a destravar a conversação geral do dia a dia, com ba
 ---
 
 ## O Que Fazer ao Final de Toda Aula (Obrigatório)
-Nos últimos minutos da chamada, abra e atualize o arquivo `Inglês/Deivid/registro-aulas.md` adicionando o bloco do dia no seguinte formato:
+Nos últimos minutos da chamada, utilize sua ferramenta de arquivos (MCP Filesystem: `read_file` e `write_file`/`edit_file`) para abrir e anexar diretamente ao final do arquivo `Inglês/Deivid/registro-aulas.md` o bloco do dia no seguinte formato:
 
 ```markdown
 ### Aula [Número] - [Dia da semana], [DD/MM/AAAA] (Fase [N] - [Tema do dia])
